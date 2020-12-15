@@ -1,4 +1,4 @@
-package s4.B203303; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID. 
+package s4.B203303; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID.
 import java.lang.*;
 import s4.specification.*;
 
@@ -47,8 +47,30 @@ public class TestCase {
 	    if(4 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return 4, when taget is H. But it returns "+freq); c++; }
 
 	    // Write your testCase here
+      myObject = new Frequencer();
+      myObject.setSpace("Hi Ho Hi Ho".getBytes());
+      myObject.setTarget("".getBytes());
+      freq = myObject.frequency();
+	    if(-1 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return -1, when taget is ''. But it returns "+freq); c++; }
 
-	}
+      myObject = new Frequencer();
+      myObject.setSpace("".getBytes());
+      myObject.setTarget("H".getBytes());
+	    freq = myObject.frequency();
+      if(0 != freq) {System.out.println("frequency() for '', should return 0, when taget is H. But it returns "+freq); c++; }
+
+      myObject = new Frequencer();
+      myObject.setSpace("Hi Ho Hi Ho".getBytes());
+      myObject.setTarget("H".getBytes());
+      freq = myObject.subByteFrequency(2, 8);
+      if(2 != freq) {System.out.println("subByteFrequency() for Hi_Ho_Hi_Ho, should return 2, when taget is H. But it returns "+freq); c++; }
+
+      myObject = new Frequencer();
+      myObject.setSpace("Hi Ho Hi Ho".getBytes());
+      myObject.setTarget("Ho ".getBytes());
+      freq = myObject.frequency();
+      if(1 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return 1, when taget is Ho_. But it returns "+freq); c++; }
+  }
 	catch(Exception e) {
 	    System.out.println("Exception occurred in Frequencer Object");
 	    c++;
@@ -79,5 +101,4 @@ public class TestCase {
 	}
 	if(c == 0) { System.out.println("TestCase OK"); }
     }
-}	    
-	    
+}

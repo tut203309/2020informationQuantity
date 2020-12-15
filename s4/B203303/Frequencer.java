@@ -1,4 +1,4 @@
-package s4.B203303; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID. 
+package s4.B203303; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID.
 import java.lang.*;
 import s4.specification.*;
 
@@ -18,6 +18,8 @@ interface FrequencerInterface {  // This interface provides the design for frequ
 
 public class Frequencer implements FrequencerInterface {
     // Code to Test, *warning: This code contains intentional problem*
+    //myTargetとmySpaceが未定義の場合は返す値が決まっている．
+    //現状はfrequency()ではmyTargetとmySpaceが定義済みを前提としている．
     byte[] myTarget;
     byte[] mySpace;
 
@@ -38,6 +40,7 @@ public class Frequencer implements FrequencerInterface {
         for(int start = 0; start<spaceLength; start++) { // Is it OK?
             boolean abort = false;
             for(int i = 0; i<targetLength; i++) {
+                //mySpace[start+i] would be out of index error
                 if(myTarget[i] != mySpace[start+i]) { abort = true; break; }
             }
             if(abort == false) { count++; }
@@ -45,6 +48,7 @@ public class Frequencer implements FrequencerInterface {
         return count;
     }
 
+    //そもそも実装されていない
     // I know that here is a potential problem in the declaration.
     @Override
     public int subByteFrequency(int start, int length) {
