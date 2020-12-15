@@ -55,6 +55,11 @@ public class Frequencer implements FrequencerInterface {
     //	if	suffix_i	>	suffix_j,	it	returns	1
     //	if	suffix_i	<	suffix_j,	it	returns	-1
     //	if	suffix_i	=	suffix_j,	it	returns	0;
+    // if(i+1 > mySpace.length-1)
+    //   return -1;
+    // else if(j+1 > mySpace.length-1)
+    //   return 1;
+
     if(mySpace[i] > mySpace[j])
       return 1;
     else if(mySpace[i] < mySpace[j])
@@ -62,7 +67,7 @@ public class Frequencer implements FrequencerInterface {
     else{
       if(i+1 <= mySpace.length-1 && j+1 <= mySpace.length-1)
         return suffixCompare(i+1, j+1);
-      else return -1;
+      else return 1;
     }
   }
 
@@ -78,8 +83,8 @@ public class Frequencer implements FrequencerInterface {
       suffixArray[i]  = i;      //	Please	note	that	each	suffix	is	expressed	by	one integer.
     }
 
-    for(int i = 0; i < space.length - 2; i++) {
-      for(int j = i + 1; j < space.length - 1; j++) {
+    for(int i = 0; i < space.length - 1; i++) {
+      for(int j = i + 1; j < space.length; j++) {
         if(suffixCompare(suffixArray[i], suffixArray[j]) == 1) {
           int temp = suffixArray[i];
           suffixArray[i] = suffixArray[j];
@@ -237,11 +242,11 @@ public static void  main(String[] args) {
 
     int result  = frequencerObject.frequency();
     System.out.print("Freq	=	"+ result+"	" );
-    
+
     if(4   ==  result){
       System.out.println("OK");
     }
-    else　{System.out.println("WRONG"); }
+    else {System.out.println("WRONG"); }
   }
   catch(Exception e)  {
     System.out.println("STOP");
