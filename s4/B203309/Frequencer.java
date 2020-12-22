@@ -232,8 +232,8 @@ public static void  main(String[] args) {
   Frequencer frequencerObject;
   try {
     frequencerObject  = new Frequencer();
-    frequencerObject.setSpace("AAA".getBytes());
-    // frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
+    // frequencerObject.setSpace("AAA".getBytes());
+    frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
 
     frequencerObject.printSuffixArray();          //	you	may	use	this	line	for	DEBUG
     /*	Example	from	"Hi	Ho	Hi	Ho"
@@ -249,7 +249,7 @@ public static void  main(String[] args) {
     9:o
     A:o	Hi	Ho
     */
-    frequencerObject.setTarget("AAA".getBytes());
+    frequencerObject.setTarget("H".getBytes());
     //
     //	****		Please	write	code	to	check	subByteStartIndex,	and	subByteEndIndex
     //
