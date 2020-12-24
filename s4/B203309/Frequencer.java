@@ -54,7 +54,8 @@ public class Frequencer implements FrequencerInterface {
     //	if	suffix_i	>	suffix_j,	it	returns	1
     //	if	suffix_i	<	suffix_j,	it	returns	-1
     //	if	suffix_i	=	suffix_j,	it	returns	0;
-
+	
+	
     if(mySpace[i] > mySpace[j])
       return 1;
     else if(mySpace[i] < mySpace[j])
@@ -66,6 +67,15 @@ public class Frequencer implements FrequencerInterface {
         return -1;
       else return 1;
     }
+	
+	/*
+	if(mySpace[i] > mySpace[j]) return 1;
+	else if(mySpace[i] < mySpace[j]) return -1;
+	else if (i+1 == mySpace.length && j+1==mySpace.length) return 0;
+    else if (i+1 == mySpace.length) return -1;
+    else if (j+1 == mySpace.length) return 1;
+	else return suffixCompare(i+1, j+1);
+	*/
   }
 
   public void  setSpace(byte [] space)  {
@@ -80,6 +90,8 @@ public class Frequencer implements FrequencerInterface {
       suffixArray[i]  = i;      //	Please	note	that	each	suffix	is	expressed	by	one integer.
     }
 
+	/*
+	//ペアプログラムで実装したコード(バブルソート)
     for(int i = 0; i < space.length - 1; i++) {
       for(int j = i + 1; j < space.length; j++) {
         if(suffixCompare(suffixArray[i], suffixArray[j]) == 1) {
@@ -89,6 +101,39 @@ public class Frequencer implements FrequencerInterface {
         }
       }
     }
+	*/
+
+	//(week4,3-2)各自で高速化(クイックソート)
+	int left=0;
+	int right=space.length-1;
+	quickSort(suffixArray,left,right);
+	
+  }
+
+  //クイックソート(追加,week4,3-2)
+  private void quickSort(int [] list, int left, int right){
+	int i, last;
+    int temp;
+
+    if (left >= right)
+        return;
+
+    last = left;
+    for (i=left+1; i <= right; i++){
+        if (suffixCompare(list[i],list[left])== -1){
+            last++;
+            temp=list[last];
+            list[last]=list[i];
+            list[i]=temp;
+        }
+    }
+
+    temp=list[left];
+    list[left]=list[last];
+    list[last]=temp;
+
+    quickSort(list, left, last-1);
+    quickSort(list, last+1, right);
   }
 
   //	Suffix	Array を用いて、文字列の頻度を求めるコード
@@ -143,6 +188,10 @@ private int targetCompare(int i,  int j,  int k)  {
   //	"Ho"						<					"Ho	"			:	"Ho	"	is	not	in	the	head	of	suffix	"Ho"
   //	"Ho"						=					"H"					:	"H"	is	in	the	head	of	suffix	"Ho"
   //	ここに比較のコードを書け
+
+
+/*
+  //ペアプログラムで実装したコード
   int start_j = j;
   for(int idx = 0; idx < k - start_j; idx++, j++){    
     if(suffixArray[i] + idx >= mySpace.length)
@@ -150,6 +199,19 @@ private int targetCompare(int i,  int j,  int k)  {
   	if(mySpace[suffixArray[i] + idx] >  myTarget[j])
 		  return 1;
     else if(mySpace[suffixArray[i]  + idx] <  myTarget[j])
+      return -1;
+  }
+  return 0;
+*/
+
+  //一部修正
+  int start_j = j;
+  for(int idx = 0; idx < k - start_j; idx++, j++){    
+    if(suffixArray[i] + idx >= mySpace.length)
+      return -1;// 1 →　-1
+  	if(mySpace[suffixArray[i] + idx] >  myTarget[j])
+		  return 1;
+   if(mySpace[suffixArray[i]  + idx] <  myTarget[j])
       return -1;
   }
   return 0;
@@ -179,9 +241,36 @@ private int subByteStartIndex(int start,  int end)  {
   //
   //	ここにコードを記述せよ。
   //
+
+  /*
+  //ペアプログラムで実装したコード
   for(int i = 0; i < mySpace.length; i++){
     if(targetCompare(i, start, end) == 0)
       return i;
+  }
+  return -1;
+  */
+  
+  //(week4,3-1)各自での二部探索実装
+  int lower=0;
+  int upper=mySpace.length-1;
+  while(lower <= upper){
+	 int mid=(lower + upper)/2;
+	 if(targetCompare(mid, start, end) == 0){
+		if(mid-1 < 0){
+			return mid;
+		}else{
+			if(targetCompare(mid-1, start, end) == 0){
+				upper=mid-1;
+			}else{
+				return mid;
+			}
+		}
+	 }else if(targetCompare(mid, start, end) < 0){
+		lower=mid+1;
+	 }else{
+		upper=mid-1;
+	 }
   }
   return -1;
 }
@@ -212,9 +301,36 @@ private int subByteEndIndex(int start,  int end)  {
   //
   // ここにコードを記述せよ
   //
+
+  /*
+  //ペアプログラムで実装したコード
   for(int j = mySpace.length - 1; j >= 0; j--){
   	if(targetCompare(j, start, end) == 0)
     	return j + 1;
+  }
+  return -1;
+  */
+
+  //(week4,3-1)各自での二部探索実装
+  int lower=0;
+  int upper=mySpace.length-1;
+  while(lower <= upper){
+	 int mid=(lower + upper)/2;
+	 if(targetCompare(mid, start, end) == 0){
+		if(mid+1 > mySpace.length-1){
+			return mid+1;
+		}else{
+			if(targetCompare(mid+1, start, end) == 0){
+				lower=mid+1;
+			}else{
+				return mid+1;
+			}
+		}
+	 }else if(targetCompare(mid, start, end) < 0){
+		lower=mid+1;
+	 }else{
+		upper=mid-1;
+	 }
   }
   return -1;
 }
