@@ -343,7 +343,7 @@ public static void  main(String[] args) {
     // frequencerObject.setSpace("AAA".getBytes());
     frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
 
-    frequencerObject.printSuffixArray();          //	you	may	use	this	line	for	DEBUG
+    //frequencerObject.printSuffixArray();          //	you	may	use	this	line	for	DEBUG
     /*	Example	from	"Hi	Ho	Hi	Ho"
     0:	Hi	Ho
     1:	Ho
