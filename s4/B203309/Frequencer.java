@@ -56,6 +56,24 @@ public class Frequencer implements FrequencerInterface {
     //	if	suffix_i	=	suffix_j,	it	returns	0;
 	
 	
+
+	while(true){
+		if(mySpace[i] > mySpace[j])
+		  return 1;
+		else if(mySpace[i] < mySpace[j])
+		  return -1;
+		else{
+		  if(i+1 <= mySpace.length-1 && j+1 <= mySpace.length-1){
+		  	  i++;
+			  j++;
+		  }
+		  else if(j+1 <= mySpace.length-1)
+			return -1;
+		  else return 1;
+		}	
+	}
+
+	/*
     if(mySpace[i] > mySpace[j])
       return 1;
     else if(mySpace[i] < mySpace[j])
@@ -66,7 +84,7 @@ public class Frequencer implements FrequencerInterface {
       else if(j+1 <= mySpace.length-1)
         return -1;
       else return 1;
-    }
+    }*/
 	
 	/*
 	if(mySpace[i] > mySpace[j]) return 1;
