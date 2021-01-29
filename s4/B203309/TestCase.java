@@ -44,7 +44,6 @@ public class TestCase {
 	    myObject = new Frequencer();
 	    myObject.setTarget("".getBytes());
 	    freq = myObject.frequency();
-		System.out.println("BBBBB");
 	    if(-1 != freq) { System.out.println("frequency() should return -1, when target is empty, but return "+freq); c++; }
 	    myObject = new Frequencer();
 	    myObject.setSpace("AAA".getBytes());
@@ -148,4 +147,4 @@ public class TestCase {
 	}
 	if(c == 0) { System.out.println("TestCase OK"); }
     }
-}	
+}
