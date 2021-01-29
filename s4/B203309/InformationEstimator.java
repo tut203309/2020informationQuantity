@@ -48,6 +48,11 @@ public class InformationEstimator implements InformationEstimatorInterface {
 
     @Override
     public double estimation(){
+		if (myTarget == null) return 0;
+		if (myTarget.length==0) return 0;
+	    if (mySpace == null) return Double.MAX_VALUE;
+		if (mySpace.length==0) return Double.MAX_VALUE;
+
         double value = Double.MAX_VALUE;
         double value1 = (double) 0.0;
         double f[] = new double[myTarget.length+1];
@@ -64,7 +69,6 @@ public class InformationEstimator implements InformationEstimatorInterface {
 		}
 		return value;
     }
-
 
     public static void main(String[] args) {
         InformationEstimator myObject;
